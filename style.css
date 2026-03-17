@@ -1,0 +1,110 @@
+/* BODY */
+body {
+    margin: 0;
+    padding: 0;
+    background: #cfe7ff;
+    font-family: "Poppins", sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Watermarks */
+body::before {
+    content: "YAS";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 120px;
+    font-weight: bold;
+    color: rgba(0,0,0,0.05);
+}
+
+.watermark {
+    position: absolute;
+    font-size: 45px;
+    font-weight: bold;
+    color: rgba(0,0,0,0.05);
+}
+.top-left { top: 10px; left: 10px; }
+.top-right { top: 10px; right: 10px; }
+.bottom-left { bottom: 10px; left: 10px; }
+.bottom-right { bottom: 10px; right: 10px; }
+
+/* WRAPPER */
+.wrapper {
+    width: 90%;
+    max-width: 400px;
+    background: white;
+    padding: 25px;
+    border-radius: 18px;
+    box-shadow: 0 5px 18px rgba(0,0,0,0.15);
+    text-align: center;
+    z-index: 2;
+}
+
+/* SVG animation */
+svg {
+    display: block;
+    margin: 0 auto 10px;
+    animation: float 3s ease-in-out infinite;
+}
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-5px); }
+    100% { transform: translateY(0px); }
+}
+
+h1 { margin: 10px 0; font-size: 24px; }
+
+.win-text {
+    color: #0080ff;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* INPUTS */
+label {
+    display: block;
+    text-align: left;
+    width: 90%;
+    margin: 6px auto 4px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+input[type="tel"] {
+    width: 90%;
+    padding: 14px;
+    border-radius: 10px;
+    border: 1.5px solid #8fbdf9;
+    font-size: 18px;
+    text-align: center;
+}
+
+.pin-wrapper {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    margin: 12px auto;
+}
+
+.pin-box {
+    width: 60px;
+    height: 60px;
+    border: 1.5px solid #8fbdf9;
+    border-radius: 10px;
+    font-size: 24px;
+    text-align: center;
+    transition: 0.2s;
+}
+
+.pin-box:focus {
+    border-color: #F4B400;
+    transform: scale(1.05);
+}
+
+button { display: none; }
